@@ -8,16 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var fuelСonsumption = ""
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            
+            Image("pic")
+            
+            VStack{
+                TextField( "  л/100км", text: $fuelСonsumption)
+                
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 17)
+                            .stroke(lineWidth: 2)
+                            .foregroundStyle(Color.purple)
+                        
+                    )
+                
+                    .frame(width: 300,height: 30)
+                    .font(.largeTitle)
+                
+                
+                Spacer()
+                
+                Button ("Рассчитать") {
+                    
+                }
+                .font(.largeTitle)
+                .foregroundStyle(Color.red)
+            }
         }
-        .padding()
     }
 }
+
 
 #Preview {
     ContentView()
