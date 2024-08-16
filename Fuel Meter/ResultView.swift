@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct ResultView: View {
+    @Binding var summ: Double
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        Text("Сумма за поездку")
+            .font(.largeTitle)
+        Text("\(summ)")
+            .padding()
+        
     }
 }
 
 #Preview {
-    ResultView()
+    ResultView(summ: .constant(1200))
 }
