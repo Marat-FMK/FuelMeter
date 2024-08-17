@@ -11,25 +11,22 @@ struct RoudList: View {
     
     let roads = Road.roads
     
-    
     var body: some View {
-        
-        List(roads) { road in
-            
-            HStack{
-                Text(road.numericName)
-                    .frame(width: 100)
-                
-                Text(road.name)
-                Spacer()
-                Text(String(road.distance))
-                    .frame(width: 80, alignment: .trailing)
-                
+        NavigationView() {
+            List(roads) { road in
+                NavigationLink(destination: AboutRoudView(road: road)) {
+                    HStack{
+                        Text(road.numericName)
+                            .frame(width: 100, alignment: .leading)
+                        
+                        Text(road.name)
+                    
+                    }
+                }
+                .listStyle(.grouped)
+                .navigationTitle("Roads")
                 
             }
-            
-            
-            
         }
     }
 }

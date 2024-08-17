@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct AboutRoudView: View {
+    
+    var road: Road
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        Image(road.pic)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .ignoresSafeArea()
+        HStack {
+            Text(road.numericName)
+            Text(road.name)
+        }
+        HStack {
+            Text(road.organization)
+            Text(" - ")
+            Text(String(road.distance))
+        }
+        
     }
 }
-
 #Preview {
-    AboutRoudView()
+    AboutRoudView(road: Road.roads.first!)
 }
