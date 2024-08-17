@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Fuel_MeterApp: App {
+struct FuelMeterApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
