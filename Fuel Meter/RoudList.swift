@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct RoudList: View {
+    
+    let roads = Road.roads
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        List(roads) { road in
+            
+            HStack{
+                Text(road.numericName)
+                    .frame(width: 100)
+                
+                Text(road.name)
+                Spacer()
+                Text(String(road.distance))
+                    .frame(width: 80, alignment: .trailing)
+                
+                
+            }
+            
+            
+            
+        }
     }
 }
 
