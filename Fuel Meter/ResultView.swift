@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ResultView: View {
-    @Binding var summ: Double
+   let result: String
+   
+    @Binding var isPresented: Bool
     var body: some View {
         
         ZStack {
@@ -21,18 +23,15 @@ struct ResultView: View {
                         .frame(width: 310, height: 200)
                         .cornerRadius(30)
                     
-                    
-                    
-                    
                     VStack { Text("Сумма за поездку")
                             .font(.largeTitle)
                         
-                        Text(String(format: "%.1f",summ ))
+                        Text(result)
                             .padding()
                     }
                 }.offset(y: -90)
               
-                Button (action: {} ) {
+                Button (action: okButtonPressed ) {
                     Text("OK")
                         .frame(width: 100, height: 50)
                         .foregroundStyle(Color.white)
@@ -46,13 +45,13 @@ struct ResultView: View {
     }
     
     
-    private func dismissView() {
-    
+    private func okButtonPressed() {
+        isPresented = false
     }
 }
     
 
 
 #Preview {
-    ResultView(summ: .constant(1200))
+    ResultView(result: "23232", isPresented: .constant(true))
 }

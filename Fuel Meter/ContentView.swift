@@ -12,12 +12,14 @@ struct ContentView: View {
     var body: some View {
      
         TabView {
-            TextFieldsView()
+//            TextFieldsView()
+            
+            SlidersView()
                 .tabItem {
                     Image(systemName: "gauge.open.with.lines.needle.67percent.and.arrowtriangle.and.car")
                     Text("Главная")
                 }
-            RoudList()
+            RoudListView()
                 .tabItem {
                     Image(systemName: "map.fill")
                     Text("Rouds")

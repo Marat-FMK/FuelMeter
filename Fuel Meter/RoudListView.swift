@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RoudList: View {
+struct RoudListView: View {
     
     let roads = Road.roads
     
@@ -32,5 +32,5 @@ struct RoudList: View {
 }
 
 #Preview {
-    RoudList()
+    RoudListView()
 }
