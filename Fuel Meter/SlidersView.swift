@@ -40,9 +40,9 @@ struct SlidersView: View {
                 
                 Text(result)
                 
-                OneSliderAttribute(sliderValue: $distanceSliderValue, tfValue: $distanceTFValue, range: distanceRange, label: "Дистанция (км)")
-                OneSliderAttribute(sliderValue: $fuelSliderValue, tfValue: $fuelTFValue, range: fuelRange, label: "Расход на 100 км (л)")
-                OneSliderAttribute(sliderValue: $priceSliderValue, tfValue: $priceTFValue, range: priceRange, label: "Цена за литр")
+                OneSliderAttribute(sliderValue: $distanceSliderValue, tfValue: $distanceTFValue, range: distanceRange, label: "Дистанция (км)", placeholderValue: "км")
+                OneSliderAttribute(sliderValue: $fuelSliderValue, tfValue: $fuelTFValue, range: fuelRange, label: "Расход на 100 км (л)", placeholderValue: "л")
+                OneSliderAttribute(sliderValue: $priceSliderValue, tfValue: $priceTFValue, range: priceRange, label: "Цена за литр", placeholderValue: "руб")
                 
                 Button (action: takeResult) {
                     Text("Результат")
@@ -51,27 +51,17 @@ struct SlidersView: View {
                 .frame(width: 300)
             }
             .sheet(isPresented: $isPresented, content: {
-                ResultView(result: result, isPresented: $isPresented)
+                ResultView(isPresented: $isPresented, distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue, result: result)
             })
         }
     }
     
-    
     private func takeResult(){
         isPresented = true
-        
-        self.result = String(((distanceSliderValue * fuelSliderValue) / 100 ) * priceSliderValue)
-        
-        
-        
-        
-//        let fue = Double(fuelСonsumption) ?? 0
-//        let dis = Double(distance) ?? 0
-//        let pri = Double(price) ?? 0
-//        
-//        summ = (( dis * fue ) / 100 ) * pri
+        self.result = String(Int(((distanceSliderValue * fuelSliderValue) / 100 ) * priceSliderValue))
     }
 }
+
 
 #Preview {
     SlidersView()

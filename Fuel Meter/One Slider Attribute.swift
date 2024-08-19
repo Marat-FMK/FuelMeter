@@ -15,6 +15,7 @@ struct OneSliderAttribute: View {
     
     let range: ClosedRange<Float>
     let label: String
+    let placeholderValue: String
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -29,7 +30,7 @@ struct OneSliderAttribute: View {
                 
                 Slider(value: $sliderValue, in : range)
                 
-                TextField("",text: $tfValue, onCommit: checkValue)
+                TextField(placeholderValue,text: $tfValue, onCommit: checkValue)
                     .frame(width: 70)
                     .textFieldStyle(.roundedBorder)
                     .clipShape(RoundedRectangle(cornerRadius: 22))
@@ -56,5 +57,5 @@ struct OneSliderAttribute: View {
 }
 
 #Preview {
-    OneSliderAttribute(sliderValue: .constant(111), tfValue: .constant("222"), range: 0...2500, label: "Distance")
+    OneSliderAttribute(sliderValue: .constant(111), tfValue: .constant("222"), range: 0...2500, label: "Distance", placeholderValue: "km")
 }

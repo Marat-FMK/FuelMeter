@@ -19,6 +19,7 @@ struct ContentView: View {
                     Image(systemName: "gauge.open.with.lines.needle.67percent.and.arrowtriangle.and.car")
                     Text("Главная")
                 }
+            
             RoudListView()
                 .tabItem {
                     Image(systemName: "map.fill")
