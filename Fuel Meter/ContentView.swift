@@ -17,13 +17,13 @@ struct ContentView: View {
             SlidersView()
                 .tabItem {
                     Image(systemName: "gauge.open.with.lines.needle.67percent.and.arrowtriangle.and.car")
-                    Text("Главная")
+                    Text("Калькулятор")
                 }
             
             RoudListView()
                 .tabItem {
                     Image(systemName: "map.fill")
-                    Text("Rouds")
+                    Text("Дороги")
                     
                 }
             

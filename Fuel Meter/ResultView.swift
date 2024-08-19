@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ResultView: View {
     
+    @Environment(\.dismiss) private var dismiss
     
     @Binding var isPresented: Bool
     let distance: Float

@@ -16,13 +16,13 @@ struct SlidersView: View {
     
     @State private var fuelSliderValue: Float = 0
     @State private var fuelTFValue: String = ""
-    var fuelRange: ClosedRange<Float> = 0...50
+    var fuelRange: ClosedRange<Float> = 0...30
     
     @State private var priceSliderValue: Float = 0
     @State private var priceTFValue: String = ""
-    var priceRange: ClosedRange<Float> = 0...150
+    var priceRange: ClosedRange<Float> = 0...110
     
-    @State private var result: String = ""
+    @State private var result: String = "0"
     
     @State private var isPresented = false
     
@@ -38,7 +38,6 @@ struct SlidersView: View {
                     .frame(width: 370, alignment: .center)
                     .font(.largeTitle)
                 
-                Text(result)
                 
                 OneSliderAttribute(sliderValue: $distanceSliderValue, tfValue: $distanceTFValue, range: distanceRange, label: "Дистанция (км)", placeholderValue: "км")
                 OneSliderAttribute(sliderValue: $fuelSliderValue, tfValue: $fuelTFValue, range: fuelRange, label: "Расход на 100 км (л)", placeholderValue: "л")
@@ -51,7 +50,7 @@ struct SlidersView: View {
                 .frame(width: 300)
             }
             .sheet(isPresented: $isPresented, content: {
-                ResultView(isPresented: $isPresented, distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue, result: result)
+                ResultView( isPresented: $isPresented, distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue, result: result)
             })
         }
     }
