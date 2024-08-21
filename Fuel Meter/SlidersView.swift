@@ -10,15 +10,15 @@ import SwiftUI
 struct SlidersView: View {
     
     
-    @State private var distanceSliderValue: Float = 0
+    @State private var distanceSliderValue: Float = 200
     @State private var distanceTFValue: String = ""
     var distanceRange: ClosedRange<Float> = 0...2500
     
-    @State private var fuelSliderValue: Float = 0
+    @State private var fuelSliderValue: Float = 11
     @State private var fuelTFValue: String = ""
     var fuelRange: ClosedRange<Float> = 0...30
     
-    @State private var priceSliderValue: Float = 0
+    @State private var priceSliderValue: Float = 58
     @State private var priceTFValue: String = ""
     var priceRange: ClosedRange<Float> = 0...110
     
@@ -65,14 +65,14 @@ struct SlidersView: View {
             isfocused = false
         }
         .sheet(isPresented: $isPresented, content: {
-            ResultView( isPresented: $isPresented, distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue, result: result)
+            ResultView( /*isPresented: $isPresented,*/ distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue/*, result: result*/)
         })
     }
     
     
     
     private func takeResult(){
-        self.result = String(Int(((distanceSliderValue * fuelSliderValue) / 100 ) * priceSliderValue))
+//        self.result = String(Int(((distanceSliderValue * fuelSliderValue) / 100 ) * priceSliderValue))
         isPresented = true
     }
 }

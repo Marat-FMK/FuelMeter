@@ -11,7 +11,7 @@ struct ResultView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var isPresented: Bool
+//    @Binding var isPresented: Bool
     let distance: Float
     let literOf100: Float
     let price: Float
@@ -19,7 +19,7 @@ struct ResultView: View {
     @State var drivenHours: Int = 0
     
     
-    let result: String
+//    let result: String
     var body: some View {
         
         ZStack {
@@ -39,7 +39,7 @@ struct ResultView: View {
                         ResultsRows(leftText: "Текущее время ", rightText: Date().formatted())
                         ResultsRows(leftText: "Время в пути -", rightText: " \(drivenTime())")
                         ResultsRows(leftText: "Время прибытия -", rightText: setArrivalTime())
-                        ResultsRows(leftText: "Стоимость топлива -", rightText: result )
+                        ResultsRows(leftText: "Стоимость топлива -", rightText: resultSumm() )
                         ResultsRows(leftText: "Диситанция -", rightText: "\(stringAndformat(distance)) км ")
                         ResultsRows(leftText: "Цена за литр бензина -"  , rightText: "\(stringAndformat( price))руб/л")
                         ResultsRows(leftText: "Расход топлива на 100 км -", rightText: "\(stringAndformat( literOf100)) л/100км")
@@ -62,7 +62,7 @@ struct ResultView: View {
     
     
     private func okButtonPressed() {
-        isPresented = false
+        dismiss()
     }
     
     private func drivenTime() -> String {
@@ -91,9 +91,13 @@ struct ResultView: View {
         date.addTimeInterval(TimeInterval(interval))
         return date.formatted()
     }
+    
+    private func resultSumm() -> String {
+    String(Int(((distance * literOf100) / 100 ) * price))
+    }
 }
 
 
 #Preview {
-    ResultView(isPresented: .constant(true), distance: 200, literOf100: 11, price: 60, result: "tyt ok")
+    ResultView(/*isPresented: .constant(true),*/ distance: 200, literOf100: 11, price: 60/*, result: "tyt ok"*/)
 }

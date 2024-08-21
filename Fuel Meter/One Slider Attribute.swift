@@ -30,7 +30,7 @@ struct OneSliderAttribute: View {
                 
                 Slider(value: $sliderValue, in : range)
                     .onChange(of: sliderValue) { _, newValue in
-                        tfValue = String(format: "%.1f",newValue)
+                        tfValue = String(format: "%.0f",newValue)
                     }
                 
                 TextField(placeholderValue,text: $tfValue) { _ in
@@ -57,7 +57,7 @@ struct OneSliderAttribute: View {
         } else {
             showAlert.toggle()
             sliderValue = 0
-            tfValue = ""
+            tfValue = "0"
         }
     }
     
