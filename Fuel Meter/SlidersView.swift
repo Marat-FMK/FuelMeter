@@ -24,18 +24,31 @@ struct SlidersView: View {
     
     @State private var result: String = "0"
     
+    @State private var showSettings = false
     @State private var isPresented = false
+    @State private var showAlert = false
     @FocusState var isfocused: Bool
     
     var body: some View {
-        
+        NavigationStack {
+            
         ZStack {
             Image("pic")
                 .resizable()
                 .opacity(0.3)
                 .ignoresSafeArea()
             
-            VStack(spacing: 30) {
+            VStack(spacing: 40) {
+                Button (action: sliderSettings) {
+                    Image(systemName: "slider.horizontal.2.rectangle.and.arrow.triangle.2.circlepath")
+                }
+                .sheet(isPresented: $showSettings, content: {
+                    SliderSettings()
+                })
+                .offset(x: 120, y: 0)
+                .font(.largeTitle)
+               
+                
                 Text("Калькулятор поездки")
                     .frame(width: 370, alignment: .center)
                     .font(.largeTitle)
@@ -65,14 +78,16 @@ struct SlidersView: View {
             isfocused = false
         }
         .sheet(isPresented: $isPresented, content: {
-            ResultView( /*isPresented: $isPresented,*/ distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue/*, result: result*/)
+            ResultView( distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue)
         })
     }
+    }
     
-    
+    private func sliderSettings() {
+        showSettings = true
+    }
     
     private func takeResult(){
-//        self.result = String(Int(((distanceSliderValue * fuelSliderValue) / 100 ) * priceSliderValue))
         isPresented = true
     }
 }

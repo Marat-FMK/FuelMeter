@@ -60,7 +60,6 @@ struct ResultView: View {
         }
     }
     
-    
     private func okButtonPressed() {
         dismiss()
     }
@@ -99,5 +98,5 @@ struct ResultView: View {
 
 
 #Preview {
-    ResultView(/*isPresented: .constant(true),*/ distance: 200, literOf100: 11, price: 60/*, result: "tyt ok"*/)
+    ResultView(distance: 200, literOf100: 11, price: 60)
 }

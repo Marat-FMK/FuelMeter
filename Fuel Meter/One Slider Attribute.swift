@@ -42,22 +42,22 @@ struct OneSliderAttribute: View {
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.decimalPad)
                     .clipShape(RoundedRectangle(cornerRadius: 22))
-//                    .alert("Некорректные данные", isPresented: $showAlert, actions: {})
-//                {
-//                    Text("Введите цифры")
-//                }
+                    .alert("Некорректные данные", isPresented: $showAlert, actions: {})
+                {
+                    Text("Введите цифры")
+                }
             }
         }.padding()
     }
         
     
     private func checkValue() {
-        if let value = Float(tfValue), range.contains(sliderValue) {
+        if let value = Float(tfValue), range.contains(Float(tfValue) ?? -1) {
             self.sliderValue = value
         } else {
             showAlert.toggle()
             sliderValue = 0
-            tfValue = "0"
+            tfValue = ""
         }
     }
     
