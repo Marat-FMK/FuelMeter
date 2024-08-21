@@ -29,33 +29,40 @@ struct OneSliderAttribute: View {
                     .font(.system(size: 25))
                 
                 Slider(value: $sliderValue, in : range)
+                    .onChange(of: sliderValue) { _, newValue in
+                        tfValue = String(format: "%.1f",newValue)
+                    }
                 
-                TextField(placeholderValue,text: $tfValue, onCommit: checkValue)
+                TextField(placeholderValue,text: $tfValue) { _ in
+                    withAnimation {
+                        checkValue()
+                    }
+                }
                     .frame(width: 70)
                     .textFieldStyle(.roundedBorder)
+                    .keyboardType(.decimalPad)
                     .clipShape(RoundedRectangle(cornerRadius: 22))
-                
-                    .alert("Некорректные данные", isPresented: $showAlert, actions: {})
-                {
-                    Text("Введите цифры")
-                }
+//                    .alert("Некорректные данные", isPresented: $showAlert, actions: {})
+//                {
+//                    Text("Введите цифры")
+//                }
             }
         }.padding()
     }
         
     
     private func checkValue() {
-        if let value = Double(tfValue), range.contains(sliderValue) {
-            self.sliderValue = Float(value)
+        if let value = Float(tfValue), range.contains(sliderValue) {
+            self.sliderValue = value
         } else {
             showAlert.toggle()
             sliderValue = 0
-            tfValue = "0"
+            tfValue = ""
         }
     }
     
 }
 
 #Preview {
-    OneSliderAttribute(sliderValue: .constant(111), tfValue: .constant("222"), range: 0...2500, label: "Distance", placeholderValue: "km")
+    OneSliderAttribute(sliderValue: .constant(1100), tfValue: .constant("222"), range: 0...2500, label: "Distance", placeholderValue: "km")
 }

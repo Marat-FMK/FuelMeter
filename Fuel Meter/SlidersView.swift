@@ -25,8 +25,10 @@ struct SlidersView: View {
     @State private var result: String = "0"
     
     @State private var isPresented = false
+    @FocusState var isfocused: Bool
     
     var body: some View {
+        
         ZStack {
             Image("pic")
                 .resizable()
@@ -38,26 +40,40 @@ struct SlidersView: View {
                     .frame(width: 370, alignment: .center)
                     .font(.largeTitle)
                 
-                
-                OneSliderAttribute(sliderValue: $distanceSliderValue, tfValue: $distanceTFValue, range: distanceRange, label: "Дистанция (км)", placeholderValue: "км")
-                OneSliderAttribute(sliderValue: $fuelSliderValue, tfValue: $fuelTFValue, range: fuelRange, label: "Расход на 100 км (л)", placeholderValue: "л")
-                OneSliderAttribute(sliderValue: $priceSliderValue, tfValue: $priceTFValue, range: priceRange, label: "Цена за литр", placeholderValue: "руб")
-                
+                VStack {
+                    OneSliderAttribute(sliderValue: $distanceSliderValue, tfValue: $distanceTFValue, range: distanceRange, label: "Дистанция (км)", placeholderValue: "км")
+                    OneSliderAttribute(sliderValue: $fuelSliderValue, tfValue: $fuelTFValue, range: fuelRange, label: "Расход на 100 км (л)", placeholderValue: "л")
+                    OneSliderAttribute(sliderValue: $priceSliderValue, tfValue: $priceTFValue, range: priceRange, label: "Цена за литр", placeholderValue: "руб")
+                }
+                .focused($isfocused)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard){
+                        Spacer()
+                        Button("Done") {
+                            isfocused = false
+                        }
+                    }
+                }
                 Button (action: takeResult) {
                     Text("Результат")
                 }
                 .font(.largeTitle)
                 .frame(width: 300)
             }
-            .sheet(isPresented: $isPresented, content: {
-                ResultView( isPresented: $isPresented, distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue, result: result)
-            })
         }
+        .onTapGesture {
+            isfocused = false
+        }
+        .sheet(isPresented: $isPresented, content: {
+            ResultView( isPresented: $isPresented, distance: distanceSliderValue, literOf100: fuelSliderValue, price: priceSliderValue, result: result)
+        })
     }
     
+    
+    
     private func takeResult(){
-        isPresented = true
         self.result = String(Int(((distanceSliderValue * fuelSliderValue) / 100 ) * priceSliderValue))
+        isPresented = true
     }
 }
 
