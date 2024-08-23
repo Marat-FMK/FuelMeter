@@ -9,10 +9,13 @@ import SwiftUI
 
 struct SlidersView: View {
     
+   
+    
     
     @State private var distanceSliderValue: Float = 200
     @State private var distanceTFValue: String = ""
-    var distanceRange: ClosedRange<Float> = 0...2500
+    @State var distanceRange: ClosedRange<Float> = 0...2500
+    
     
     @State private var fuelSliderValue: Float = 11
     @State private var fuelTFValue: String = ""

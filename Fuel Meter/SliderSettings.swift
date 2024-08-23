@@ -18,34 +18,41 @@ struct SliderSettings: View {
    
     
     var body: some View {
-        
-        Text(" Настройка диапазона значений слайдера ")
-        
-        SettingsRow(rangeName: "Дистанция", rangeAt: $distanceRangeAt, rangeTo: $distanceRangeTo)
-        SettingsRow(rangeName: "Расход", rangeAt: $fuelRangeAt, rangeTo: $fuelRangeTo)
-        SettingsRow(rangeName: "Стоимость", rangeAt: $priceRangeAt, rangeTo: $priceRangeTo)
-        
-        Button (action: saveToUD) {
-            Text("Сохранить")
+        VStack(spacing: 40) {
+            Spacer()
+            Text(" Настройка диапазона значений слайдера ")
+            Spacer()
+            SettingsRow(rangeName: "Дистанция", rangeAt: $distanceRangeAt, rangeTo: $distanceRangeTo)
+            SettingsRow(rangeName: "Расход", rangeAt: $fuelRangeAt, rangeTo: $fuelRangeTo)
+            SettingsRow(rangeName: "Стоимость", rangeAt: $priceRangeAt, rangeTo: $priceRangeTo)
+            Button (action: saveToUD) {
+                Text("Сохранить")
+            }
         }
+            .padding(EdgeInsets(top: 80, leading: 16, bottom: 50, trailing: 16))
     }
     
     
-    private func int(from value: String) -> Int {
-        
-        guard let value = Int(value) else { return 0 }
+    private func float(from value: String) -> Float {
+        guard let value = Float(value) else { return 0 }
         return value
-        
-        
     }
     
-     func setRanges() -> [ClosedRange<Int>] {
+     func setRanges() -> [ClosedRange<Float>] {
          
-         let distanceUserRange = int(from: distanceRangeAt)...int(from: distanceRangeTo)
-         let fuelUserRange = int(from: fuelRangeAt)...int(from: fuelRangeTo)
-         let priceUserRange = int(from: priceRangeAt)...int(from: priceRangeTo)
+         let distanceUserRange = float(from: distanceRangeAt)...float(from: distanceRangeTo)
+         let fuelUserRange = float(from: fuelRangeAt)...float(from: fuelRangeTo)
+         let priceUserRange = float(from: priceRangeAt)...float(from: priceRangeTo)
          
-         return [distanceUserRange,fuelUserRange,priceUserRange]
+         let ranges = [distanceUserRange,fuelUserRange,priceUserRange]
+         
+         UserDefaults.standard.set(distanceUserRange, forKey: "distance")
+         
+         return ranges
+    
+         
+         
+        
     }
     
     private func saveToUD() {
