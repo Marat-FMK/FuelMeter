@@ -45,6 +45,7 @@ struct OneSliderAttribute: View {
                     .alert("Некорректные данные", isPresented: $showAlert, actions: {})
                 {
                     Text("Введите цифры")
+                        .font(.title)
                 }
             }
         }.padding()
